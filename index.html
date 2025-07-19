@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación</title>
+  <link rel="stylesheet" href="https://use.typekit.net/pid8wrc.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #000;
+    }
+
+    body {
+      display: flex;
+      justify-content: center; /* Centrado horizontal */
+      align-items: center;     /* Centrado vertical */
+    }
+
+    .pixel {
+      font-family: "argent-pixel-cf", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .grande {
+      font-size: 2em;
+    }
+
+    .flotante {
+	  opacity: 0;
+	  transform: translateY(20px);
+	  transition: all 0.8s ease;
+	}
+
+	.animar-flotante {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+
+	.grande, .grande {
+	  cursor: pointer;
+	}
+
+	.grande:hover, .grande:hover {
+	  transform: scale(1.3);
+	}
+
+	/* Animación fade out + movimiento hacia abajo */
+	.fade-slide-down {
+	  animation: fadeDown 0.8s forwards;
+	}
+
+	/* Animación fade in + movimiento hacia arriba */
+	.fade-slide-up {
+	  animation: fadeUp 0.8s forwards;
+	}
+
+	@keyframes fadeDown {
+	  from {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	  to {
+	    opacity: 0;
+	    transform: translateY(50px);
+	  }
+	}
+
+	@keyframes fadeUp {
+	  from {
+	    opacity: 0;
+	    transform: translateY(50px);
+	  }
+	  to {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	}
+
+	/* Animación shake */
+	@keyframes shake {
+	  0%, 100% { transform: translateX(0); }
+	  20%, 60% { transform: translateX(-10px); }
+	  40%, 80% { transform: translateX(10px); }
+	}
+
+	.shake {
+	  animation: shake 1s;
+	}
+
+	/* Fade out simple */
+	.fade-out {
+	  animation: fadeOut 0.5s forwards;
+	}
+
+	@keyframes fadeOut {
+	  from { opacity: 1; }
+	  to { opacity: 0; }
+	}
+
+	/* Fade in simple (puedes usar la que ya tienes o esta) */
+	.fade-in {
+	  animation: fadeIn 0.5s forwards;
+	}
+
+	@keyframes fadeIn {
+	  from { opacity: 0; }
+	  to { opacity: 1; }
+	}
+
+	/* Zoom-out y salto hacia arriba */
+	@keyframes zoomOutJump {
+	  0% {
+	    transform: scale(0.3) translateY(100px);
+	    opacity: 0;
+	  }
+	  50% {
+	    transform: scale(1.1) translateY(-50px);
+	    opacity: 1;
+	  }
+	  100% {
+	    transform: scale(1) translateY(0);
+	  }
+	}
+
+	.zoom-jump-in {
+	  animation: zoomOutJump 1s forwards;
+	  z-index: 2;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	}
+
+	/* Para que slide3 baje mientras se desvanece */
+	.fade-slide-down {
+	  animation: fadeSlideDown 0.8s forwards;
+	}
+
+	@keyframes fadeSlideDown {
+	  0% {
+	    opacity: 1;
+	    transform: translateY(0);
+	  }
+	  100% {
+	    opacity: 0;
+	    transform: translateY(50px);
+	  }
+	}
+
+	#patita_img {
+	  transition: transform 0.3s ease;
+	  cursor: pointer;
+	}
+
+	#patita_img:hover {
+	  transform: scale(1.05);
+	}
+
+	#hoversi {
+	  transition: transform 0.3s ease;
+	  cursor: pointer;
+	}
+
+	#hoversi:hover {
+	  transform: scale(1.05);
+	}
+
+	#hoverno {
+	  transition: transform 0.3s ease;
+	  cursor: pointer;
+	}
+
+	#hoverno:hover {
+	  transform: scale(1.05);
+	}
+
+  </style>
+</head>
+<body>
+  <div id="slide1">
+    <center><h1 class="pixel" id="texto_tehallegado">Te ha llegado una wea secreta,</h1></center>
+    <center><h1 class="pixel" id="quieres_abrirla">¿Quieres abrirla?</h1></center>
+    <br>
+    <center>
+      	<a class="pixel grande flotante" id="btn_si" onclick="abrir_carta()"><span id="hoversi">SI</span></a>
+		<span style="padding-left: 50px;"></span>
+		<a class="pixel grande flotante" id="btn_no" onclick="bob_triste()"><span id="hoverno">NO</span></a>
+    </center>
+  </div>
+  <br>
+  <div id="slide2" style="display: none;">
+  	<img src="https://media.discordapp.net/attachments/1167516945957011548/1395958657518141540/SOBRE1N.png?ex=687c574f&is=687b05cf&hm=2f4df3267bb438321580bbf93b00f1a25ea9ea89c8f6df37f8beee524ff8b7b7&=&format=webp&quality=lossless&width=1053&height=571">
+  	<br>
+  	<center><h2 class="pixel" id="parece_carta">Parece ser una carta... ¿Qué contiene?</h2></center>
+  </div>
+  <div id="slide3" style="display: none;">
+  	<center><img src="https://media.discordapp.net/attachments/1167516945957011548/1395958909466054666/SOBRE2N.png?ex=687c578b&is=687b060b&hm=7fd5a7117b9c2ed5f5626ef5c4753bf47b1bb46f908f17cc50bc115dc25e97e4&=&format=webp&quality=lossless&width=1021&height=853"></center>
+  </div>
+  <div id="slide4" style="display: none;">
+  	<center><img style="margin-left: 30px; margin-top: 30px;" src="https://media.discordapp.net/attachments/1167516945957011548/1395970465062846565/CARTA1.png?ex=687c624e&is=687b10ce&hm=ca2621ab2b4e91af42df3b5b0a7662b088ae4cc1c6415e3715458d21f74fef8d&=&format=webp&quality=lossless&width=799&height=977"></center>
+  </div>  
+  <div id="patita" style="display: none; z-index: 5; margin-top: 35%; margin-left: 10px;" onclick="firmar()">
+  	<center><div id="patita_img"><img width="150px" src="https://media.discordapp.net/attachments/1167516945957011548/1395970201136136222/paw_recurso.png?ex=687c620f&is=687b108f&hm=9d9a68adc46aa2f3de881482fa3b3945ad07145c472ce50a5cb76d062924bd99&=&format=webp&quality=lossless&width=1021&height=1021"></div></center>
+  </div>
+  <div id="slide5" style="display: none; margin-top: 10%;">
+    <center><h1 class="pixel" id="texto_gracias1" style="display: none;">¡Gracias por confirmar tu asistencia!</h1></center>
+  	<center><img style="width: 250px" src="https://media.discordapp.net/attachments/1167516945957011548/1395979292579725363/OALGOCHIN3.png?ex=687c6a87&is=687b1907&hm=35e76ff84d6e8fabf1fb9a9e64fa2b465c0cfae4e9b9eefce326b1277d2ec0ea&=&format=webp&quality=lossless&width=657&height=594"></center>
+    <center><h1 class="pixel" id="texto_gracias2" style="display: none;">Nos vemos el día 25 de Julio a las 20:00 hrs</h1></center>
+    <center><img style="width: 100px" src="https://media.discordapp.net/attachments/1167516945957011548/1395994913337901086/donkey-kong-dance.gif?ex=687c7913&is=687b2793&hm=be0a2482fb22db6ed42c3b0bb727da1497656b2df3f8d5db7ab7c989f8a1775f&=&width=513&height=406"></center>
+  </div>
+  <script>
+    function animar_texto(id, velocidad = 50, callback = null) {
+	  const elemento = document.getElementById(id);
+	  if (!elemento) return;
+
+	  const textoCompleto = elemento.textContent;
+	  let index = 0;
+	  elemento.textContent = "";
+
+	  // Cambiar el color a blanco justo antes de escribir
+	  elemento.style.color = "white";
+
+	  function escribir() {
+	    if (index < textoCompleto.length) {
+	      elemento.textContent += textoCompleto.charAt(index);
+	      index++;
+	      setTimeout(escribir, velocidad);
+	    } else if (callback) {
+	      callback();
+	    }
+	  }
+
+	  escribir();
+	}
+
+
+    window.addEventListener("DOMContentLoaded", () => {
+			animar_texto("texto_tehallegado", 50, () => {
+			animar_texto("quieres_abrirla", 50, () => {
+			  // Una vez que ambos textos estén listos, animar los botones
+			  document.getElementById("btn_si").classList.add("animar-flotante");
+			  document.getElementById("btn_no").classList.add("animar-flotante");
+			  document.getElementById("btn_si").style.color = "white";
+			  document.getElementById("btn_no").style.color = "white";
+			  document.getElementById("btn_si").classList.add("animar-select");
+			  document.getElementById("btn_no").classList.add("animar-select");
+
+			});
+		});
+	});
+
+    function bob_triste() {
+	  // Crear el div que cubrirá toda la pantalla
+	  const overlay = document.createElement("div");
+	  overlay.style.position = "fixed";
+	  overlay.style.top = "0";
+	  overlay.style.left = "0";
+	  overlay.style.width = "100vw";
+	  overlay.style.height = "100vh";
+	  overlay.style.backgroundImage = "url('https://i.pinimg.com/564x/6e/66/bf/6e66bff8ec5f7847ba156fb9439a7fd8.jpg')";
+	  overlay.style.backgroundSize = "cover";
+	  overlay.style.backgroundPosition = "center";
+	  overlay.style.zIndex = "9999";
+	  overlay.style.opacity = "1";
+	  overlay.style.transition = "opacity 2s ease";
+
+	  document.body.appendChild(overlay);
+
+	  // Agregar el sonido (usaremos un audio MP3 alternativo porque no se puede reproducir directo desde YouTube)
+	  const audio = new Audio("https://www.myinstants.com/media/sounds/vine-boom.mp3");
+	  audio.play();
+
+	  // Hacer fade out luego de un pequeño retardo (para que se vea)
+	  setTimeout(() => {
+	    overlay.style.opacity = "0";
+
+	    // Eliminar el div cuando termina la transición
+	    overlay.addEventListener("transitionend", () => {
+	      overlay.remove();
+	    });
+	  }, 500); // espera medio segundo antes de comenzar el fade
+	}
+
+	function abrir_carta() {
+	  const slide1 = document.getElementById("slide1");
+	  const slide2 = document.getElementById("slide2");
+	  const slide3 = document.getElementById("slide3");
+	  const slide4 = document.getElementById("slide4");
+	  const patita = document.getElementById("patita");
+
+	  // Fade out + bajar slide1
+	  slide1.classList.add("fade-slide-down");
+
+	  slide1.addEventListener("animationend", () => {
+	    slide1.style.display = "none";
+
+	    // Mostrar slide2 y animar fade in + subir
+	    slide2.style.display = "block";
+	    slide2.classList.add("fade-slide-up");
+
+	    animar_texto("parece_carta");
+
+	    setTimeout(() => {
+    		document.getElementById("parece_carta").classList.add("fade-slide-down");
+		      slide2.classList.add("shake");
+
+		      slide2.addEventListener("animationend", () => {
+		        // Al terminar shake, fade out slide2
+		        slide2.classList.remove("shake");
+		        slide2.classList.add("fade-out");
+
+		        slide2.addEventListener("animationend", () => {
+		          slide2.style.display = "none";
+
+	          	// Mostrar slide3 con fade in
+				slide3.style.display = "block";
+				slide3.classList.add("fade-in");
+
+				slide3.addEventListener("animationend", () => {
+				  // Mostrar slide4 por encima, con zoom-jump
+				  slide4.style.display = "block";
+				  slide4.classList.add("zoom-jump-in");
+
+				  slide4.addEventListener("animationend", () => {
+				    // Ahora hacer que slide3 haga fade-slide-down y desaparezca
+				    slide3.classList.add("fade-slide-down");
+
+				    slide3.addEventListener("animationend", () => {
+			      	slide3.style.display = "none";
+
+		      		patita.style.display = "block";
+					patita.classList.add("fade-in");
+
+				    }, { once: true });
+				  }, { once: true });
+				}, { once: true });
+
+
+		        }, { once: true });
+		      }, { once: true });
+		},3000);
+	  }, { once: true });
+	}
+
+	function firmar(){
+
+  		const slide5 = document.getElementById("slide5");
+		slide5.style.display = "block";
+	  	slide5.classList.add("zoom-jump-in");
+	  	setTimeout(() => {
+
+			document.getElementById("slide4").classList.add("fade-slide-down");
+			document.getElementById("patita").classList.add("fade-slide-down");
+
+	  		slide4.addEventListener("animationend", () => {
+	      		slide4.style.display = "none";
+  				document.getElementById("texto_gracias1").style.display = "block";;
+  				document.getElementById("texto_gracias2").style.display = "block";;
+
+	      		animar_texto("texto_gracias1", 50, () => {
+					animar_texto("texto_gracias2", 50, () => {
+
+					});
+				});
+
+		    }, { once: true });
+		},1000);
+	}
+
+  </script>
+</body>
+</html>
