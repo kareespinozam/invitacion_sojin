@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Invitación</title>
+  <title>────୨ৎ──── ¡ Abre aquí ! ────୨ৎ────</title>
   <link rel="stylesheet" href="https://use.typekit.net/pid8wrc.css">
   <style>
     html, body {
@@ -159,7 +159,14 @@
 	#patita_img:hover {
 	  transform: scale(1.05);
 	}
+	#inicio_img {
+	  transition: transform 0.3s ease;
+	  cursor: pointer;
+	}
 
+	#inicio_img:hover {
+	  transform: scale(1.05);
+	}
 	#hoversi {
 	  transition: transform 0.3s ease;
 	  cursor: pointer;
@@ -182,10 +189,13 @@
 </head>
 <body>
 	<audio id="bg-music" src="musica.mp3" autoplay loop></audio>
-	<button id="playMusic" style="width: 0px;" onclick="document.getElementById('bg-music').play()"></button>
-  <div id="slide1">
-    <center><h1 class="pixel" id="texto_tehallegado">Te ha llegado una wea secreta,</h1></center>
-    <center><h1 class="pixel" id="quieres_abrirla">¿Quieres abrirla?</h1></center>
+	<audio id="tilin" src="tilin.mp3" autoplay></audio>
+	<div id="slide0">
+		<center><div id="inicio_img" onclick="empezar()"><img src="https://media.discordapp.net/attachments/1167516945957011548/1396003246081835008/OLA_RECURSO.png?ex=687c80d6&is=687b2f56&hm=94ed275dc9bae5b37a8a6d01054f9c7b2a26c4fa6544e8f66930b0597a4438b9&=&format=webp&quality=lossless&width=1214&height=483"></div></center>
+	</div>
+  <div id="slide1" style="display: none;">
+    <center><h1 class="pixel" id="texto_tehallegado">Te ha llegado un mensaje secreto,</h1></center>
+    <center><h1 class="pixel" id="quieres_abrirla">¿Quieres abrirlo?</h1></center>
     <br>
     <center>
       	<a class="pixel grande flotante" id="btn_si" onclick="abrir_carta()"><span id="hoversi">SI</span></a>
@@ -240,21 +250,34 @@
 	}
 
 
-    window.addEventListener("DOMContentLoaded", () => {
-    	document.getElementById("playMusic").click(); 
-			animar_texto("texto_tehallegado", 50, () => {
-			animar_texto("quieres_abrirla", 50, () => {
-			  // Una vez que ambos textos estén listos, animar los botones
-			  document.getElementById("btn_si").classList.add("animar-flotante");
-			  document.getElementById("btn_no").classList.add("animar-flotante");
-			  document.getElementById("btn_si").style.color = "white";
-			  document.getElementById("btn_no").style.color = "white";
-			  document.getElementById("btn_si").classList.add("animar-select");
-			  document.getElementById("btn_no").classList.add("animar-select");
+    function empezar(){
+			document.getElementById('tilin').play()
 
-			});
-		});
-	});
+		  	const slide0 = document.getElementById("slide0");
+		  	const slide1 = document.getElementById("slide1");
+
+		  	slide0.classList.add("fade-slide-down");
+
+			  slide0.addEventListener("animationend", () => {
+				document.getElementById('bg-music').play()
+			    slide0.style.display = "none";
+					slide1.style.display = "block";
+					slide1.classList.add("fade-in");
+
+					animar_texto("texto_tehallegado", 50, () => {
+					animar_texto("quieres_abrirla", 50, () => {
+					  // Una vez que ambos textos estén listos, animar los botones
+					  document.getElementById("btn_si").classList.add("animar-flotante");
+					  document.getElementById("btn_no").classList.add("animar-flotante");
+					  document.getElementById("btn_si").style.color = "white";
+					  document.getElementById("btn_no").style.color = "white";
+					  document.getElementById("btn_si").classList.add("animar-select");
+					  document.getElementById("btn_no").classList.add("animar-select");
+
+					});
+				});
+				}, { once: true });
+	}
 
     function bob_triste() {
 	  // Crear el div que cubrirá toda la pantalla
@@ -325,6 +348,7 @@
 
 				slide3.addEventListener("animationend", () => {
 				  // Mostrar slide4 por encima, con zoom-jump
+
 				  slide4.style.display = "block";
 				  slide4.classList.add("zoom-jump-in");
 
@@ -354,6 +378,10 @@
   		const slide5 = document.getElementById("slide5");
 		slide5.style.display = "block";
 	  	slide5.classList.add("zoom-jump-in");
+	  	const audio = document.getElementById("bg-music");
+  audio.src = "dk.mp3";
+  audio.load(); // recarga el nuevo archivo
+  audio.play(); // comienza a reproducir
 	  	setTimeout(() => {
 
 			document.getElementById("slide4").classList.add("fade-slide-down");
