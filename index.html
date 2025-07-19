@@ -181,6 +181,8 @@
   </style>
 </head>
 <body>
+	<audio id="bg-music" src="musica.mp3" autoplay loop></audio>
+	<button id="playMusic" style="width: 0px;" onclick="document.getElementById('bg-music').play()"></button>
   <div id="slide1">
     <center><h1 class="pixel" id="texto_tehallegado">Te ha llegado una wea secreta,</h1></center>
     <center><h1 class="pixel" id="quieres_abrirla">¿Quieres abrirla?</h1></center>
@@ -239,6 +241,7 @@
 
 
     window.addEventListener("DOMContentLoaded", () => {
+    	document.getElementById("playMusic").click(); 
 			animar_texto("texto_tehallegado", 50, () => {
 			animar_texto("quieres_abrirla", 50, () => {
 			  // Una vez que ambos textos estén listos, animar los botones
